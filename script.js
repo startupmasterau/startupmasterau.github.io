@@ -80,7 +80,7 @@ function showResult(score, playerChoice, computerChoice) {
     resultDiv.innerText = "Oops!! Something went wrong"
   }
   
-  handsDiv.innerText = `👨🏻‍🦰Player: ${playerChoice} vs 🤖Computer: ${computerChoice}` //get emoji with Windows key + .
+  handsDiv.innerText = `👨🏻‍🦰${playerChoice} vs 🤖${computerChoice}` //get emoji with Windows key + .
   playerScoreDiv.innerText = `👨🏻‍🦰: ${totalScore.playerScore} 🤖: ${totalScore.computerScore}`
 }
 
