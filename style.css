@@ -3,6 +3,8 @@ html, body {
   width: 100%;
   padding: 0;
   margin:0;
+  background: #1c1c1c;
+  color: white;
 }
 
 .wrapper {
@@ -16,18 +18,60 @@ html, body {
   flex-direction: column;
 }
 
+.gameSection {
+  visibility: hidden;
+}
+
 .buttons {
   display: flex;
   gap: 20px;
+  justify-content: center;
 }
 
-button {
+#nameButton {
+  background-color: white;
+  border-radius:10px;
+  padding: 10px;
+  font-weight: 800;
+}
+
+.headingText {
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.rpsButton {
   height: 100px;
   width: 100px;
   font-size: 48px;
   border-radius: 30px;
   cursor: pointer;
+}
 
+.rpsButton:focus {
+  background-color:#4169E1;
+}
+
+#hands {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttonCompChoice {
+  background-color:red;
+  height: 90px;
+  width: 100px;
+  font-size: 48px;
+  border-radius: 30px;
+  cursor: pointer;
+  padding-top: 15px;
+}
+
+.resultH2 {
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .resultContainer {
@@ -36,3 +80,50 @@ button {
   margin-top: 20px;
 }
 
+.nameInput {
+  display: flex;
+  text-align: center;
+}
+
+#nameInput {
+  border-radius:20px;
+  padding: 10px;
+}
+
+#endGameButton {
+  background-color: white;
+  border-radius:10px;
+  padding: 10px;
+  font-weight: 800;
+  margin-top: 10px;
+}
+
+.animate-charcter
+{
+  text-transform: capitalize;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: BOLD;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
