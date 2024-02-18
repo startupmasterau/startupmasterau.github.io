@@ -10,18 +10,27 @@
 
 <body>
   <div class="wrapper">
-    <h1>Rock Paper Scissors</h1>
-  <div class="buttons">
-    <button class="rpsButton" value="Rock">✊</button>
-    <button class="rpsButton" value="Paper">🤚</button>
-    <button class="rpsButton" value="Scissors">✌</button>
+    <h1 id="titleText" class="headingText">Rock Paper Scissors</h1>
+  <div class="nameInput">
+    <input id="nameInput" type="text" placeholder="Enter your name"</input>
+    <button id="nameButton" type="button" onclick="getNameValue();">Enter</button>
   </div>
-  <div class="resultContainer">
-  <div id="player-score"></div>
-  <div id="hands"></div>
-  <div id="result"></div>
-  <button id='endGameButton'>🔴</button>
-  </div>
+    <div class="gameSection">
+      <h2 class="headingText">Choose Your Move</h2>
+        <div class="buttons">
+        <button class="rpsButton" value="Rock">✊</button>
+        <button class="rpsButton" value="Paper">🤚</button>
+        <button class="rpsButton" value="Scissors">✌</button>
+      </div>
+      <div class="resultContainer">
+        <h2 class="headingText" style="font-size:1.5rem;">Computer's Move</h2>
+        <div id="hands"></div>
+        <div id="result"></div>
+        <h2 class="headingText" style="font-size:1.5rem;">Score</h2>
+        <div id="player-score"></div>
+      <button id='endGameButton'>Start All Over</button>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
