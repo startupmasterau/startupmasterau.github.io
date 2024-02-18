@@ -62,22 +62,24 @@ function getComputerChoice() {
 // human draws - getResult('Rock', 'Rock') 👉 0
 function getResult(playerChoice, computerChoice) {
   // return the result of score based on if you won, drew, or lost
-  let score
+  // score object stores core of current played game for both computer and player
+  let score = {computerScoreNow: 0, playerScoreNow: 0}
   // All situations where human wins, set `score` to 1
   
   if ((playerChoice == "Rock" && computerChoice == "Scissors") || (playerChoice == "Scissors" && computerChoice == "Paper") || (playerChoice == "Paper" && computerChoice == "Rock")) { 
-    score = 1
+    score.playerScoreNow = 1
   }
 
   // All situations where human draws, set `score` to 0
   // make sure to use else ifs here
   else if (playerChoice == computerChoice) {
-    score = 0
+    score.playerScoreNow = 0
+    score.computerScoreNow = 0
   }
 
   // Otherwise human loses (aka set score to -1)
   else {
-    score = -1
+    score.computerScoreNow = 1
   }
 
   // return score
@@ -112,14 +114,17 @@ function showResult(score, buttonHTML) {
   const playerScoreDiv = document.getElementById("player-score")
   const handsDiv = document.getElementById("hands")
 
-  if (score == 1) {
+  console.log(score.playerScoreNow)
+  console.log(score.computerScoreNow)
+
+  if (score.playerScoreNow == 1) {
     resultDiv.innerHTML = "<h2 class='resultH2' id='resultWin' style='color:green;'>You Win!</h2>"
   }
-  else if (score == 0) {
+  else if (score.playerScoreNow == 0 && score.computerScoreNow == 0) {
     resultDiv.innerHTML = "<h2 class='resultH2' id='resultDraw' style='color:white;'>It's a Draw!</h2>"
   }
-  else if (score == -1) {
-    resultDiv.innerHTML = "<h2 class='resultH2' id='resultWin' style='color:red;'>You Lose!</h2>"
+  else if (score.computerScoreNow == 1) {
+    resultDiv.innerHTML = "<h2 class='resultH2' id='resultLose' style='color:red;'>You Lose!</h2>"
   }
   else {
     resultDiv.innerText = "Oops!! Something went wrong"
@@ -143,8 +148,8 @@ function showResult(score, buttonHTML) {
 function onClickRPS(playerChoice) {
   const computerChoice = getComputerChoice()
   const score = getResult(playerChoice, computerChoice)
-  totalScore.playerScore += score // alternatively you can access the property using totalScore['playerScore']
-  totalScore.computerScore -= score
+  totalScore.playerScore += score.playerScoreNow // alternatively you can access the property using totalScore['playerScore']
+  totalScore.computerScore += score.computerScoreNow
   createComputerButton(computerChoice) // this function passes computerChoice from here to determine what innerHTML to show for Computer's move button like div
   showResult(score, buttonHTML)
 }
