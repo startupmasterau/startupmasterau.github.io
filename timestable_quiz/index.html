@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Timestable Quiz</title>
+<link rel='stylesheet' href='./styles.css'>
+</head>
+<body>
+    <main>
+        <h1>Timestable Quiz</h1>
+        <div id="checkbox-container">
+            <p>Select the timestables</p>
+            <div id="timestable-checkboxes">
+                <label><input type="checkbox" id="cb1" name="1-timestable" class="timestable-range" value="1"> 1 times tables</label>
+                <label><input type="checkbox" id="cb2" name="2-timestable" class="timestable-range" value="2"> 2 times tables</label>
+                <label><input type="checkbox" id="cb3" name="3-timestable" class="timestable-range" value="3"> 3 times tables</label>
+                <label><input type="checkbox" id="cb4" name="4-timestable" class="timestable-range" value="4"> 4 times tables</label>
+                <label><input type="checkbox" id="cb5" name="5-timestable" class="timestable-range" value="5"> 5 times tables</label>
+                <label><input type="checkbox" id="cb6" name="6-timestable" class="timestable-range" value="6"> 6 times tables</label>
+                <label><input type="checkbox" id="cb7" name="7-timestable" class="timestable-range" value="7"> 7 times tables</label>
+                <label><input type="checkbox" id="cb8" name="8-timestable" class="timestable-range" value="8"> 8 times tables</label>
+                <label><input type="checkbox" id="cb9" name="9-timestable" class="timestable-range" value="9"> 9 times tables</label>
+                <label><input type="checkbox" id="cb10" name="10-timestable" class="timestable-range" value="10"> 10 times tables</label>
+                <label><input type="checkbox" id="cb11" name="11-timestable" class="timestable-range" value="11"> 11 times tables</label>
+                <label><input type="checkbox" id="cb12" name="12-timestable" class="timestable-range" value="12"> 12 times tables</label>
+            </div>
+        </div>
+        <div id="question-amount-container" class="center-container">
+            <label for="question-amount">How many questions?</label>
+            <input type="text" id="question-amount" min="'1" max="12" maxlength="2" size="2">
+        </div>
+        <div id="error-container" class="center-container">
+            <span id="error-span"></span>
+        </div>
+        <div id="lets-go-container" class="center-container">
+            <button type="button" id="lets-go-button" value="">Let's go</button>
+        </div>
+        <div id="question-flex-container">
+            <div></div>
+            <div id="question-container">       
+            </div>
+            <div></div>
+        </div>
+        <div id="answer-container">
+            <label for="answer-input">Answer</label>
+            <input type="text" id="answer-input" inputmode="numeric" maxlength="3" size="3" required>
+            <button type="button" id="answer-button">Enter</button>
+        </div>
+        <div id="result-container">
+            <span id="result-span"></span>
+        </div>
+        <div id="clear-container" class="align-buttons">
+            <button type="button" id="practise-button">Practise Again?</button>
+            <button type="button" id="clear-button" onclick="window.location.reload()">Start Over</button>
+        </div>
+    </main>
+<script src="./script.js"></script>
+</body>
+</html>
