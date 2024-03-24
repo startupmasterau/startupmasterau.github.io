@@ -145,6 +145,16 @@ h1 {
     h1 {
         font-size: 50px;
     }
+
+    #question-amount-container>label {
+        font-size: 20px;
+    }
+
+    #checkbox-container {
+        border: 2px groove grey;
+        padding: 0;
+    }
+
     #timestable-checkboxes {
         grid-template-columns: auto auto;
     }
