@@ -1,0 +1,142 @@
+@font-face {
+    font-family: goodUnicorn;
+    src: url(resources/GoodUnicornRegular-Rxev.ttf) format('truetype');
+  }
+
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+    background-color: powderblue;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+}
+
+.align-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 100px;
+    font-family: goodUnicorn;
+}
+
+#checkbox-container {
+    border: 5px groove black;
+    padding: 20px;
+    margin: 0 10%;
+}
+
+#checkbox-container>p {
+    font-size: 20px;
+    margin-left: 30px;
+}
+
+#timestable-checkboxes>label {
+    font-weight: bolder;
+}
+
+#question-amount {
+    /* padding: 5px; */
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#error-container {
+    margin-top: 10px;
+}
+
+#error-span {
+    color: red;
+    font-size: 15px;
+}
+
+#question-amount-container {
+    margin-top: 20px;
+}
+
+#question-amount-container>label {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 25px;
+}
+
+#timestable-checkboxes {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-top: 20px;
+    justify-content: space-evenly;
+}
+
+.timestable-range {
+    width: 20px;
+    margin: 5px;
+    height: 10px;
+}
+
+#lets-go-button, #answer-button, #clear-button, #practise-button {
+    border-radius: 10%;
+    padding: 20px 20px;
+    background-color: yellow;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#question-flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#question-container {
+    font-size: 2rem;
+    font-weight: bold;
+    border: 5px solid black;
+    padding: 20px;
+    margin-top: 20px;;
+}
+
+#answer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#answer-container>label {
+    align-self: center;
+    margin-right: 10px;
+}
+
+#answer-input {
+    padding: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+#clear-container {
+    margin-top: 100px;
+}
+
+.hidden {
+    display:none;
+}
+
+.show {
+    display:flex;
+}
