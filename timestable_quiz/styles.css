@@ -78,7 +78,7 @@ h1 {
     display: grid;
     grid-template-columns: auto auto auto;
     margin-top: 20px;
-    justify-content: space-evenly;
+    justify-content: normal;
 }
 
 .timestable-range {
@@ -130,7 +130,7 @@ h1 {
 }
 
 #clear-container {
-    margin-top: 100px;
+    margin-top: 20px;
 }
 
 .hidden {
@@ -157,5 +157,11 @@ h1 {
 
     #timestable-checkboxes {
         grid-template-columns: auto auto;
+    }
+
+    #lets-go-button, #answer-button, #clear-button, #practise-button {
+        padding: 10px 10px;
+        font-weight: bold;
+        font-size: 15px;
     }
 }
