@@ -47,7 +47,8 @@ const answerInputCheck = setInputFilter(document.getElementById("answer-input"),
   }, "Only digits are allowed");
 const answerInput = document.getElementById("answer-input");
 const answerButton = document.getElementById('answer-button');
-const wrongAnswersDiv = document.getElementById('wrong-answers-container');
+const wrongAnswersContainer = document.getElementById('wrong-answers-container');
+const wrongAnswersDiv = document.getElementById('wrong-answers');
 const resultSpan = document.getElementById('result-span');
 const practiseButton = document.getElementById('practise-button');
 const clearButton = document.getElementById('clear-button');
@@ -217,10 +218,10 @@ const showResults = () => {
   practiseButton.style.visibility = 'visible';
   let wrongs = "";
   wrongAnswers.forEach( (wrong) => {
-    wrongs += wrong + "? , ";
+    wrongs += `<span>${wrong}?</span>`;
   });
-  wrongAnswersDiv.innerHTML = `<p id="wrong-answers-heading">You need more practise for the timestables you got wrong!</p><br>
-  <p id="wrong-answers-p">${wrongs}</p>`
+  wrongAnswersContainer.innerHTML = `<p id="wrong-answers-heading">You need more practise for the timestables you got wrong!</p><br>`;
+  wrongAnswersDiv.innerHTML = wrongs;
   resultSpan.innerText = `You got ${correctAnswers} correct out of ${questionAmountFinal}`
 };
     
