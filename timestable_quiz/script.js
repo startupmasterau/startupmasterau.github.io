@@ -63,7 +63,8 @@ let questionAmountFinal = 0;
 let questionAmountRunning = 0;
 let correctAnswers = 0;
 let questionCounter = 0;
-endGame = false;
+let previouslyCorrectlyAnsweredQuestions = [];
+let questionString = "";
 
 //function to check at least one checkbox checked
 const atLeastOneChecked = (checkboxGroup) => {
@@ -78,7 +79,6 @@ const atLeastOneChecked = (checkboxGroup) => {
 //function to to get checkbox values
 const getCheckboxValues = () => {
   const checkboxValues = document.querySelectorAll('.timestable-range');
-  console.log("🚀 | getCheckboxValues | checkboxValues:", checkboxValues);
   // check if at least one checkbox is selected
   const isValidCheckboxSelection = atLeastOneChecked(checkboxValues);
   if (!isValidCheckboxSelection) {
@@ -98,7 +98,6 @@ const getCheckboxValues = () => {
 // function to amount of questions from input
 const getQuestionAmount = () => {
   const questionAmount = parseInt(document.getElementById('question-amount').value);
-  console.log("🚀 | getQuestionAmount | questionAmount:", questionAmount);
   if (questionAmount < 1 || questionAmount > 50 || !questionAmount) {
       errorSpan.textContent = "Please enter between 1 and 50 questions only"
       return
@@ -112,21 +111,36 @@ const getRandomElement = (array) => {
   return randomElement;
 };
 
+// function to check if questions questions have already been asked & answered correctly
+
 
 // function to generate questions
 const generateQuestion = () => {
+  // if checkboxResults array x 12 (that is all the possible combinations) is equal to questionAmountFinal
+  // then delete contents of previouslyCorrectlyAnsweredQuestions array so that the same questions can be asked again
+  if ((checkboxResults.length * 12) === previouslyCorrectlyAnsweredQuestions.length) {
+    previouslyCorrectlyAnsweredQuestions = [];
+  };
   // pick a random element (selected timestable) from checkboxResults array
-  const randomElement = getRandomElement(checkboxResults);
+  let randomElement = getRandomElement(checkboxResults);
   //generate a random number between 1-12 to multiply against range
-  const random12 = Math.ceil(Math.random() * 12)
+  let random12 = Math.ceil(Math.random() * 12)
+  // generate the question
+  questionString = `${random12} X ${randomElement} =`;
+  previouslyCorrectlyAnsweredQuestions.forEach( (prevQuestion) => {
+    while (questionString === prevQuestion) {
+      random12 = Math.ceil(Math.random() * 12);
+      randomElement = getRandomElement(checkboxResults);
+      questionString = `${random12} X ${randomElement} =`;
+      return questionString;
+    }
+  });
   // multiply it by a random timetable range selected
   answer = random12 * randomElement;
   // display the question
-  const questionString = `${random12} X ${randomElement} =`;
   questionContainerDiv.innerText = questionString;
   // increment the question counter
   questionCounter ++
-  console.log("🚀 | generateQuestion | questionCounter:", questionCounter);
   // show how many questions are left
   resultSpan.textContent = `${questionCounter} out of ${questionAmountFinal}`
   // unhide the answer input and enter button (hidden initially from checkAnswer)
@@ -138,23 +152,18 @@ const generateQuestion = () => {
 //function to check answer entered
 const checkAnswer = () => {
   const answerInput = parseInt(document.getElementById('answer-input').value);
-  console.log("🚀 | checkAnswer | answerInput:", answerInput);
-  console.log('answer: ', answer)
   const compare = (answerInput === answer)
-  console.log('answer = answerInput', compare)
-
   //hide the answer input field enter button
   answerContainerDiv.style.visibility = 'hidden';
-
   if (answer === answerInput) {
     questionContainerDiv.innerText = "Correct";
     document.getElementById('answer-input').value = "";
-    console.log('correct');
     correctAnswers ++;
+    // add correctly answered question in CorrectlyAnsweredpreviousQuestions array
+    previouslyCorrectlyAnsweredQuestions.push(questionString)
   } else {
     questionContainerDiv.innerText = "Wrong";
     document.getElementById('answer-input').value = "";
-    console.log('wrong');
   }
 }
 
@@ -164,7 +173,6 @@ const practiseAgain = () => {
   //reset variables, but not the questionAmountFinal
   questionCounter = 0;
   questionAmountRunning = 0;
-  endGame = false;
   correctAnswers = 0;
   generateQuestion();
 };
@@ -183,17 +191,9 @@ const playGame = () => {
 
   // get the values from the checkboxes (timetable ranges) and store it into checkboxResults array
   getCheckboxValues();
-  console.log("🚀 | checkboxResults:", checkboxResults);
-
-  // console.log("🚀 | letsgoButton.addEventListener | randomElement:", randomElement);
-  // generateQuestion(randomElement);
-  // console.log("🚀 | letsgoButton.addEventListener | questionAmountFinal2:", questionAmountFinal);
   
   //stores how many questions for the quiz
   questionAmountFinal = getQuestionAmount();
-  console.log("🚀 | letsgoButton.addEventListener | questionAmountFinal:", questionAmountFinal);
-  // questionAmountRunning = questionAmountFinal; << might need to turn this back on later for the counter
-  // console.log("🚀 | letsgoButton.addEventListener | questionAmountRunning:", questionAmountRunning);
 
   // when a timestable and question amount is valid, then hide/unhide elements for quiz to begin and generate first question
   if (questionAmountFinal && checkboxResults.length > 0) {
@@ -225,7 +225,6 @@ answerButton.addEventListener('click', () => {
     setTimeout( () => {questionContainerDiv.innerText = "Quiz Completed"}, 1000);
     answerContainerDiv.style.visibility = 'hidden';
     practiseButton.style.visibility = 'visible';
-    endGame = true;
     resultSpan.innerText = `You got ${correctAnswers} correct out of ${questionAmountFinal}`
   } else {
     setTimeout( () => {generateQuestion()}, 2000);
@@ -244,7 +243,7 @@ answerInput.addEventListener('keydown',function(e) {
       endGame = true;
       resultSpan.innerText = `You got ${correctAnswers} correct out of ${questionAmountFinal}`
     } else {
-      setTimeout( () => {generateQuestion()}, 2000);
+      setTimeout( () => {generateQuestion()}, 1500);
     }
   }
 });
