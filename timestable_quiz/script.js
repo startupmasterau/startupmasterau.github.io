@@ -246,9 +246,13 @@ answerButton.addEventListener('click', () => {
   }
 })
 
-// add keypress event listenr to answerInput
+// add keypress event listener to answerInput
 answerInput.addEventListener('keydown',function(e) {
   if (e.key === "Enter"){
+    if (!document.getElementById("answer-input").value) {
+      document.getElementById("answer-input").reportValidity();
+      return
+    }
     checkAnswer();
     // finish game if all questions answered
     if (questionCounter === questionAmountFinal) {
