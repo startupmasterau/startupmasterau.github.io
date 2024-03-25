@@ -47,6 +47,7 @@ const answerInputCheck = setInputFilter(document.getElementById("answer-input"),
   }, "Only digits are allowed");
 const answerInput = document.getElementById("answer-input");
 const answerButton = document.getElementById('answer-button');
+const wrongAnswersDiv = document.getElementById('wrong-answers-container');
 const resultSpan = document.getElementById('result-span');
 const practiseButton = document.getElementById('practise-button');
 const clearButton = document.getElementById('clear-button');
@@ -65,6 +66,7 @@ let correctAnswers = 0;
 let questionCounter = 0;
 let previouslyCorrectlyAnsweredQuestions = [];
 let questionString = "";
+let wrongAnswers = [];
 
 //function to check at least one checkbox checked
 const atLeastOneChecked = (checkboxGroup) => {
@@ -163,6 +165,7 @@ const checkAnswer = () => {
     previouslyCorrectlyAnsweredQuestions.push(questionString)
   } else {
     questionContainerDiv.innerText = "Wrong";
+    wrongAnswers.push(questionString);
     document.getElementById('answer-input').value = "";
   }
 }
@@ -174,6 +177,7 @@ const practiseAgain = () => {
   questionCounter = 0;
   questionAmountRunning = 0;
   correctAnswers = 0;
+  wrongAnswers = [];
   generateQuestion();
 };
 
@@ -206,6 +210,19 @@ const playGame = () => {
       generateQuestion();
   }
 }
+
+const showResults = () => {
+  setTimeout( () => {questionContainerDiv.innerText = "Quiz Completed"}, 1000);
+  answerContainerDiv.style.visibility = 'hidden';
+  practiseButton.style.visibility = 'visible';
+  let wrongs = "";
+  wrongAnswers.forEach( (wrong) => {
+    wrongs += wrong + "? , ";
+  });
+  wrongAnswersDiv.innerHTML = `<p id="wrong-answers-heading">You need more practise for the timestables you got wrong!</p><br>
+  <p id="wrong-answers-p">${wrongs}</p>`
+  resultSpan.innerText = `You got ${correctAnswers} correct out of ${questionAmountFinal}`
+};
     
 // add click event listener to let's go button
 letsgoButton.addEventListener('click', () => {
@@ -222,12 +239,9 @@ answerButton.addEventListener('click', () => {
   checkAnswer();
   // finish game if all questions answered
   if (questionCounter === questionAmountFinal) {
-    setTimeout( () => {questionContainerDiv.innerText = "Quiz Completed"}, 1000);
-    answerContainerDiv.style.visibility = 'hidden';
-    practiseButton.style.visibility = 'visible';
-    resultSpan.innerText = `You got ${correctAnswers} correct out of ${questionAmountFinal}`
+    showResults();
   } else {
-    setTimeout( () => {generateQuestion()}, 2000);
+    setTimeout( () => {generateQuestion()}, 1500);
   }
 })
 
@@ -237,11 +251,7 @@ answerInput.addEventListener('keydown',function(e) {
     checkAnswer();
     // finish game if all questions answered
     if (questionCounter === questionAmountFinal) {
-      setTimeout( () => {questionContainerDiv.innerText = "Quiz Completed"}, 2000);
-      answerContainerDiv.style.visibility = 'hidden';
-      practiseButton.style.visibility = 'visible';
-      endGame = true;
-      resultSpan.innerText = `You got ${correctAnswers} correct out of ${questionAmountFinal}`
+      showResults();
     } else {
       setTimeout( () => {generateQuestion()}, 1500);
     }
