@@ -132,6 +132,7 @@ h1 {
 #wrong-answers {
     display: grid;
     grid-template-columns: auto auto auto;
+    margin: 0 30%;
 }
 
 #wrong-answers-heading {
@@ -183,5 +184,9 @@ h1 {
         padding: 10px 10px;
         font-weight: bold;
         font-size: 15px;
+    }
+
+    #wrong-answers {
+        margin: 0;
     }
 }
