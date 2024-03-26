@@ -179,6 +179,8 @@ const practiseAgain = () => {
   questionAmountRunning = 0;
   correctAnswers = 0;
   wrongAnswers = [];
+  wrongAnswersContainer.innerHTML = "";
+  wrongAnswersDiv.innerHTML = "";
   generateQuestion();
 };
 
