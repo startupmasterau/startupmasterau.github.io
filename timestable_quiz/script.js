@@ -181,6 +181,7 @@ const practiseAgain = () => {
   wrongAnswers = [];
   wrongAnswersContainer.innerHTML = "";
   wrongAnswersDiv.innerHTML = "";
+  practiseButton.style.visibility = 'hidden';
   generateQuestion();
 };
 
@@ -222,8 +223,12 @@ const showResults = () => {
   wrongAnswers.forEach( (wrong) => {
     wrongs += `<span>${wrong}?</span>`;
   });
+  if (wrongs) {
   wrongAnswersContainer.innerHTML = `<p id="wrong-answers-heading">You need more practise for the timestables you got wrong!</p><br>`;
   wrongAnswersDiv.innerHTML = wrongs;
+  } else {
+  wrongAnswersContainer.innerHTML = `<p id="wrong-answers-heading">Excellent! You got 100%. Keep up the good work.</p><br>`;
+  }
   resultSpan.innerText = `You got ${correctAnswers} correct out of ${questionAmountFinal}`
 };
     
